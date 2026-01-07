@@ -1,22 +1,31 @@
-import logo from './logo.svg';
+
 import './App.css';
+import HandleAPi from './Components/HandleAPi';
+import Student from './Components/Student';
+import { BrowserRouter, Routes,Route } from 'react-router-dom';
+import Navbar from './Components/Navbar';
+import ProtectedRoutes from './routes/ProtectedRoutes';
+import { Navigate } from 'react-router-dom';
+import { isAuthenticated } from './utils/auth';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <BrowserRouter>
+           <Navbar/>
+           <Routes>
+            <Route path='/login' element={
+              isAuthenticated() ? <Navigate to="/students" replace/> : <HandleAPi/>
+            } />
+            <Route path='/students' element={
+              <ProtectedRoutes>
+                <Student/>
+              </ProtectedRoutes>
+            } />
+            <Route path='/' element={<h1>Welcome to Home Page</h1>} />  
+           </Routes>
+        </BrowserRouter>
       </header>
     </div>
   );
