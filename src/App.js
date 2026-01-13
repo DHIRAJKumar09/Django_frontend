@@ -7,11 +7,14 @@ import Navbar from './Components/Navbar';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import { Navigate } from 'react-router-dom';
 import { isAuthenticated } from './utils/auth';
+import About from './Components/About';
+import Courses from './Components/Courses';
+import StudentForms from './Components/StudentForms';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div >
+      <header >
         <BrowserRouter>
            <Navbar/>
            <Routes>
@@ -23,6 +26,22 @@ function App() {
                 <Student/>
               </ProtectedRoutes>
             } />
+            <Route path='/about' element={
+              <ProtectedRoutes>
+                <About/>
+              </ProtectedRoutes>
+            } />
+            <Route path='/courses' element={
+              <ProtectedRoutes>
+               <Courses/>
+              </ProtectedRoutes>
+            } />  
+            <Route path='/create_student' element={
+              <ProtectedRoutes>
+                 <StudentForms/>
+              </ProtectedRoutes>
+            }/>
+              
             <Route path='/' element={<h1>Welcome to Home Page</h1>} />  
            </Routes>
         </BrowserRouter>

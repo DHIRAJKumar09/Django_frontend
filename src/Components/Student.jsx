@@ -16,7 +16,14 @@ const Student = () => {
       <h2>Students</h2>
       <ul>
         {studentsData.map(s => (
-          <li key={s.id}>{s.name} - {s.email}</li>
+          <>
+                 <li key={s.id}>{s.name} - {s.email}</li>
+                 <div className='btn-container'>
+                  <button className='edit-btn'>Edit</button>
+                  <button className='delete-btn'>Delete</button>
+                 </div>
+          </>
+          
         ))}
       </ul>
     </div>
